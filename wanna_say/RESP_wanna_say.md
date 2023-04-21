@@ -171,6 +171,6 @@ protocolError ，最开始的结构体中的Err报错处理
 
 最后是*数组处理，parseArray
 
-如果都不是，则内部' '空的问题，按' '空分割为多行，然后按照数组的MakeMultiBulkReply多组字符串进行处理
+如果都不是，说明是文本协议如“set a a”，则需要处理内部' '空的问题，按' '空分割为多行，然后按照数组的MakeMultiBulkReply多组字符串进行处理
 
 整体考虑是相当周全的
