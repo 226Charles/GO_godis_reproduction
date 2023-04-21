@@ -121,7 +121,7 @@ func parse0(rawReader io.Reader, ch chan<- *Payload) {
 	}
 }
 
-// 特殊空回复
+// 字符串回复，同时处理特殊无对应指令-1回复
 func parseBulkString(header []byte, reader *bufio.Reader, ch chan<- *Payload) error {
 	strLen, err := strconv.ParseInt(string(header[1:]), 10, 64)
 	if err != nil || strLen < -1 {
@@ -140,7 +140,7 @@ func parseBulkString(header []byte, reader *bufio.Reader, ch chan<- *Payload) er
 	return nil
 }
 
-// fullresync
+// RDB持久化字符串处理 RDB和AOF持久化不包含CRLF 所以需要重写一个处理函数
 func parseRDBBulkString(reader *bufio.Reader, ch chan<- *Payload) error {
 	header, err := reader.ReadBytes('\n')
 	header = bytes.TrimSuffix(header, []byte{'\r', '\n'})
