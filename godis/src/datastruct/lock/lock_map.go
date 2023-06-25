@@ -100,7 +100,7 @@ func (locks *Locks) RLocks(keys ...string) {
 	}
 }
 
-func (locks *Locks) URLocks(keys ...string) {
+func (locks *Locks) UnLocks(keys ...string) {
 	indices := locks.toLockIndices(keys, false)
 	for _, index := range indices {
 		mu := locks.table[index]
@@ -108,7 +108,7 @@ func (locks *Locks) URLocks(keys ...string) {
 	}
 }
 
-func (locks *Locks) URnLocks(keys ...string) {
+func (locks *Locks) RUnLocks(keys ...string) {
 	indices := locks.toLockIndices(keys, false)
 	for _, index := range indices {
 		mu := locks.table[index]
